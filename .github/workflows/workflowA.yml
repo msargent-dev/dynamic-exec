@@ -1,9 +1,10 @@
-name: hello-world
-on: 
-  workflow_dispatch:
-jobs:
-  my-job:
-    runs-on: ubuntu-latest
-    steps:
-      - name: my-step
-        run: echo "Hello World from A!"
+name: Test
+description: 'composite run action'
+
+runs:
+  using: "composite"
+  steps: 
+    - name: Echo
+      shell: bash
+      run: |
+        echo hello from A
