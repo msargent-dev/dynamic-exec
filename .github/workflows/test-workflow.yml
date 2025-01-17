@@ -16,12 +16,11 @@ jobs:
     - name: Checkout repository
       uses: actions/checkout@v4  # This step checks out your repository.
 
-    - name: Run Starter Workflow
+    - name: Move Action To Known Location
       run: |
-        cd .github/workflows  # This is the directory containing your workflow file
-        mkdir deploy
-        mv ${{ github.event.inputs.name }} deploy/action.yml  # Rename the workflow file to main.yml
+	mkdir deploy-action
+        mv ${{ github.event.inputs.name }} deploy-action/action.yml
       working-directory: ${{ github.workspace }}
     
     - name: Execute Starter Workflow
-      uses: ./.github/workflows/deploy  # Use the local directory where the workflow is placed
+      uses: ./deploy-action  # Use the local directory where the workflow is placed
