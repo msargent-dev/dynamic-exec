@@ -19,8 +19,9 @@ jobs:
     - name: Run Starter Workflow
       run: |
         cd .github/workflows  # This is the directory containing your workflow file
-        mv ${{ github.event.inputs.name }} main.yml  # Rename the workflow file to main.yml
+        mkdir deploy
+        mv ${{ github.event.inputs.name }} deploy/action.yml  # Rename the workflow file to main.yml
       working-directory: ${{ github.workspace }}
     
     - name: Execute Starter Workflow
-      uses: ./.github/workflows/main.yml  # Use the local directory where the workflow is placed
+      uses: ./.github/workflows/deploy  # Use the local directory where the workflow is placed
