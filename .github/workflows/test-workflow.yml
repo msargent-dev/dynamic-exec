@@ -18,7 +18,7 @@ jobs:
 
     - name: Move Action To Known Location
       run: |
-	mkdir deploy-action
+        mkdir deploy-action
         mv ${{ github.event.inputs.name }} deploy-action/action.yml
       working-directory: ${{ github.workspace }}
     
