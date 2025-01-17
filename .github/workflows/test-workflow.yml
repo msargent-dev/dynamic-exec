@@ -1,0 +1,26 @@
+name: Test TAF Workflow
+on:
+  workflow_dispatch:
+    inputs:
+        name:
+          type: choice
+          description: What to run
+          options: 
+          - workflowA.yml
+          - workflowB.yml
+
+jobs:
+  call-starter-workflow:
+    runs-on: ubuntu-latest  # Or choose an appropriate runner
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v4  # This step checks out your repository.
+
+    - name: Run Starter Workflow
+      run: |
+        cd .github/workflows  # This is the directory containing your workflow file
+        mv ${{ github.event.inputs.name }} main.yml  # Rename the workflow file to main.yml
+      working-directory: ${{ github.workspace }}
+    
+    - name: Execute Starter Workflow
+      uses: ./.github/workflows/main.yml  # Use the local directory where the workflow is placed
