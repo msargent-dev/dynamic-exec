@@ -1,0 +1,25 @@
+name: Test TAF Workflow Remote
+on:
+  workflow_dispatch:
+
+jobs:
+  call-starter-workflow:
+    runs-on: ubuntu-latest  # Or choose an appropriate runner
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v4  # This step checks out your repository.
+
+    - name: Checkout repository
+      uses: actions/checkout@v4
+      with:
+        repository: msargent-dev/dynamic-config-repo
+        path: remote-deploy-repo
+
+    - name: Move Action To Known Location
+      run: |
+        mkdir deploy-action
+        mv remote-deploy-repo/deploy-config.yml deploy-action/action.yml
+      working-directory: ${{ github.workspace }}
+    
+    - name: Execute Starter Workflow
+      uses: ./deploy-action  # Use the local directory where the workflow is placed
