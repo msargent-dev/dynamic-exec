@@ -28,3 +28,11 @@ jobs:
           git clone https://github.com/msargent-dev/label-practice.git
           ls dynamic-config-repo
           ls label-practice
+          
+          cat label-practice/testfile.txt
+          
+          mkdir tmp
+          cp dynamic-config-repo/deploy-config.yml tmp/action.yml
+
+      - name: Execute workflow
+        uses: ./tmp
