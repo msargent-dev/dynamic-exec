@@ -25,4 +25,6 @@ jobs:
       - name: Run Command
         run: |
           git clone https://github.com/msargent-dev/dynamic-config-repo.git
+          git clone https://github.com/msargent-dev/label-practice.git
           ls dynamic-config-repo
+          ls label-practice
