@@ -20,7 +20,8 @@ jobs:
 
       - name: Set env
         run: |
-          echo "NAMESPACE_ENV=${{ inputs.namespace }}" >> GITHUB_ENV
+          echo "NAMESPACE_ENV=${{ inputs.namespace }}" >> $GITHUB_ENV
+
 
       - name: Run Command
         run: |
