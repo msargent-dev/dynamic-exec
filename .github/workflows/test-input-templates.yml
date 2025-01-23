@@ -1,0 +1,23 @@
+name: Test Input Workflow
+on:
+  workflow_dispatch:
+    inputs:
+      command:
+        type: string
+        description: "Command to run"
+        default: "echo hello"
+      namespace:
+        type: string
+        description: "Example namespace"
+        default: "default"
+
+jobs:
+  call-starter-workflow:
+    runs-on: ubuntu-latest  # Or choose an appropriate runner
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4  # This step checks out your repository.
+
+      - name: Run Command
+        run: |
+          ${{ inputs.command }}
