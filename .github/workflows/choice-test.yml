@@ -35,7 +35,7 @@ jobs:
       - name: Validate inputs
         run: |
           if [[ ${{ inputs.deployment-type }} == "general" ]]; then
-            if [[ -z ${{ inputs.general-repo }} ]]; then 
+            if [[ -z "${{ inputs.general-repo }}" ]]; then 
               echo "general-repo must be set when 'general' deployment is selected"
               exit 1
             fi
