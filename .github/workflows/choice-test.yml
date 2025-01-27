@@ -71,5 +71,5 @@ jobs:
       - name: List Directory and Run Command
         if: $${{ inputs.deployment-type }} == "general"
         run: |
-          ls ${{ inputs.general-repo }}
+          ls *
           ${{ inputs.command }}
