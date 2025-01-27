@@ -38,6 +38,13 @@ jobs:
             bundle_deployment=true
           fi
           
+          if [[ "$general_deployment" == "$bundle_deployment" ]]; then
+            if [[ "$general_deployment" == "false" ]]; then
+              echo "Parameters must only be given for one of 'general' or 'bundle' deployment type, not both.
+              exit 1
+            fi
+          fi
+          
           echo $general_deployment
           echo $bundle_deployment
 #      - name: Checkout Repo
