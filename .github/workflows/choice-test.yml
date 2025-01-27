@@ -28,12 +28,18 @@ jobs:
 
       - name: Validate inputs
         run: |
-          general_deployment=true
-          if [[ -z "${{ inputs.general-repo }}" || -z "${{ inputs.general-branch }}" || -z "${{ inputs.general-command }}" ]]; then
-            general_deployment=false
+          general_deployment=false
+          if [[ -n "${{ inputs.general-repo }}" && -n "${{ inputs.general-branch }}" && -n "${{ inputs.general-command }}" ]]; then
+            general_deployment=true
+          fi
+          
+          bundle_deployment=false
+          if [[ -n "${{ inputs.bundle-command }}" ]]; then
+            bundle_deployment=true
           fi
           
           echo $general_deployment
+          echo $bundle_deployment
 #      - name: Checkout Repo
 #        if: ${{ inputs.deployment-type == 'general' }}
 #        uses: actions/checkout@v4
