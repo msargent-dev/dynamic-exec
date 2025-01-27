@@ -34,11 +34,29 @@ jobs:
 
       - name: Validate inputs
         run: |
+          valid_input=true
+          
           if [[ ${{ inputs.deployment-type }} == "general" ]]; then
             if [[ -z "${{ inputs.general-repo }}" ]]; then 
               echo "general-repo must be set when 'general' deployment is selected"
-              exit 1
+              valid_input=false
+            fi
+            if [[ -z "${{ inputs.general-branch }}" ]]; then 
+              echo "general-branch must be set when 'general' deployment is selected"
+              valid_input=false
+            fi
+            if [[ -z "${{ inputs.general-command }}" ]]; then 
+              echo "general-command must be set when 'general' deployment is selected"
+              valid_input=false
             fi
           elif [[ ${{ inputs.deployment-type }} == "bundle" ]]; then
-            echo "bundle"
+            if [[ -z "${{ inputs.bundle-command }}" ]]; then 
+              echo "bundle-command must be set when 'bundle' deployment is selected"
+              valid_input=false
+            fi
+          fi
+          
+          if !$valid_input; then
+            echo "Invalid inputs...exiting."
+            exit 1
           fi
