@@ -72,4 +72,4 @@ jobs:
         if: $${{ inputs.deployment-type }} == "general"
         run: |
           ls *
-          eval "${{ inputs.command }}"
+          eval "${{ inputs.general-command }}"
