@@ -73,3 +73,8 @@ jobs:
         run: |
           ls *
           eval "${{ inputs.general-command }}"
+
+      - name: Run Bundle Command
+        if: ${{ inputs.deployment-type }} == "bundle"
+        run: |
+          eval "${{ inputs.bundle-command }}"
