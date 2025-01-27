@@ -1,0 +1,41 @@
+name: Choice Test Workflow
+on:
+  workflow_dispatch:
+    inputs:
+      deployment-type:
+        type: choice
+        description: "Type of deployment"
+        options:
+          - "general"
+          - "bundle"
+      general-repo:
+        type: string
+        description: "Repository to checkout for a general deployment. Required when 'general' deployment is picked, is ignored otherwise."
+        default: ""
+      general-branch:
+        type: string
+        description: "Branch to checkout for a general deployment. Required when 'general' deployment is picked, is ignored otherwise."
+        default: ""
+      general-command:
+        type: string
+        description: "Command to run for a general deployment. Required when 'general' deployment is picked, is ignored otherwise."
+        default: ""
+      bundle-command:
+        type: string
+        description: "Command to run for a bundle deployment. Required when 'bundle' deployment is picked, is ignored otherwise."
+        default: ""
+
+jobs:
+  run-workflow:
+    runs-on: ubuntu-latest  # Or choose an appropriate runner
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4  # This step checks out your repository.
+
+      - name: Validate inputs
+        run: |
+          if [[ ${{ inputs.deployment-type }} == "general" ]]; then
+            echo "general"
+          elif [[ ${{ inputs.deployment-type }} == "bundle" ]]; then
+            echo "bundle"
+          fi
