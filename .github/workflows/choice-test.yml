@@ -56,7 +56,7 @@ jobs:
             fi
           fi
           
-          if [[ "$valid_input" == true ]]; then
+          if [[ "$valid_input" != true ]]; then
             echo "Invalid inputs...exiting."
             exit 1
           fi
