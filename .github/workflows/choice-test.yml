@@ -62,19 +62,19 @@ jobs:
           fi
 
       - name: Checkout Repo
-        if: ${{ inputs.deployment-type }} == "general"
+        if: ${{ inputs.deployment-type == "general" }}
         uses: actions/checkout@v4
         with:
           repository: ${{ inputs.general-repo }}
           ref: ${{ inputs.general-branch }}
 
       - name: List Directory and Run Command
-        if: ${{ inputs.deployment-type }} == "general"
+        if: ${{ inputs.deployment-type == "general" }}
         run: |
           ls *
           eval "${{ inputs.general-command }}"
 
       - name: Run Bundle Command
-        if: ${{ inputs.deployment-type }} == "bundle"
+        if: ${{ inputs.deployment-type == "bundle" }}
         run: |
           eval "${{ inputs.bundle-command }}"
