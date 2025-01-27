@@ -28,7 +28,7 @@ jobs:
 
       - name: Validate inputs
         run: |
-          [[ -z "${{ inputs.general-repo }}" ] || [ -z "${{ inputs.general-branch }}" ] || [ -z "${{ inputs.general-command }}" ]] || general_deployment=1 
+          [[ -z "${{ inputs.general-repo }}" || -z "${{ inputs.general-branch }}" || [ -z "${{ inputs.general-command }}" ]] && general_deployment=true || general_deployment=false
           
           echo $general_deployment
 #      - name: Checkout Repo
