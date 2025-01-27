@@ -60,3 +60,16 @@ jobs:
             echo "Invalid inputs...exiting."
             exit 1
           fi
+
+      - name: Checkout Repo
+        if: $${ inputs.deployment-type }} == "general"
+        uses: actions/checkout@v4
+        with:
+          name: ${{ inputs.general-repo }}
+          ref: ${{ inputs.general-branch }}
+
+      - name: List Directory and Run Command
+        if: $${ inputs.deployment-type }} == "general"
+        run: |
+          ls ${{ inputs.general-repo }}
+          ${{ inputs.command }}
