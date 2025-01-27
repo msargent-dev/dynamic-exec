@@ -65,7 +65,7 @@ jobs:
         if: $${{ inputs.deployment-type }} == "general"
         uses: actions/checkout@v4
         with:
-          name: ${{ inputs.general-repo }}
+          repository: ${{ inputs.general-repo }}
           ref: ${{ inputs.general-branch }}
 
       - name: List Directory and Run Command
