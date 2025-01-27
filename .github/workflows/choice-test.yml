@@ -2,12 +2,6 @@ name: Choice Test Workflow
 on:
   workflow_dispatch:
     inputs:
-      deployment-type:
-        type: choice
-        description: "Type of deployment"
-        options:
-          - "general"
-          - "bundle"
       general-repo:
         type: string
         description: "Repository to checkout for a general deployment. Required when 'general' deployment is picked, is ignored otherwise."
@@ -34,47 +28,26 @@ jobs:
 
       - name: Validate inputs
         run: |
-          valid_input=true
+          general_deployment=[[ -n "${{ inputs.general-repo }}" && -n  "${{ inputs.general-branch }}" && "${{ inputs.general-command }}" ]]
+          bundle_deployment=[[ -n "${{ inputs.bundle-command }}" ]]
           
-          if [[ ${{ inputs.deployment-type }} == "general" ]]; then
-            if [[ -z "${{ inputs.general-repo }}" ]]; then 
-              echo "general-repo must be set when 'general' deployment is selected"
-              valid_input=false
-            fi
-            if [[ -z "${{ inputs.general-branch }}" ]]; then 
-              echo "general-branch must be set when 'general' deployment is selected"
-              valid_input=false
-            fi
-            if [[ -z "${{ inputs.general-command }}" ]]; then 
-              echo "general-command must be set when 'general' deployment is selected"
-              valid_input=false
-            fi
-          elif [[ ${{ inputs.deployment-type }} == "bundle" ]]; then
-            if [[ -z "${{ inputs.bundle-command }}" ]]; then 
-              echo "bundle-command must be set when 'bundle' deployment is selected"
-              valid_input=false
-            fi
-          fi
-          
-          if [[ "$valid_input" != true ]]; then
-            echo "Invalid inputs...exiting."
-            exit 1
-          fi
+          echo $general_deployment
+          echo $bundle_deployment
 
-      - name: Checkout Repo
-        if: ${{ inputs.deployment-type == 'general' }}
-        uses: actions/checkout@v4
-        with:
-          repository: ${{ inputs.general-repo }}
-          ref: ${{ inputs.general-branch }}
-
-      - name: List Directory and Run Command
-        if: ${{ inputs.deployment-type == 'general' }}
-        run: |
-          ls *
-          eval "${{ inputs.general-command }}"
-
-      - name: Run Bundle Command
-        if: ${{ inputs.deployment-type == 'bundle' }}
-        run: |
-          eval "${{ inputs.bundle-command }}"
+#      - name: Checkout Repo
+#        if: ${{ inputs.deployment-type == 'general' }}
+#        uses: actions/checkout@v4
+#        with:
+#          repository: ${{ inputs.general-repo }}
+#          ref: ${{ inputs.general-branch }}
+#
+#      - name: List Directory and Run Command
+#        if: ${{ inputs.deployment-type == 'general' }}
+#        run: |
+#          ls *
+#          eval "${{ inputs.general-command }}"
+#
+#      - name: Run Bundle Command
+#        if: ${{ inputs.deployment-type == 'bundle' }}
+#        run: |
+#          eval "${{ inputs.bundle-command }}"
