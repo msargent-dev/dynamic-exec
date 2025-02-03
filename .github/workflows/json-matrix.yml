@@ -8,7 +8,8 @@ jobs:
     steps:
       - id: set-matrix
         run: |
-          echo "::set-output name=matrix::yq e -o=json '.include = .data | del(.data)' fake-config.yml"
+          json_output=$(yq e -o=json '.include = .data | del(.data)' fake-config.yml)
+          echo "::set-output name=matrix::$json_output"
   job2:
     needs: job1
     runs-on: ubuntu-latest
