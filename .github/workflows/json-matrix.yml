@@ -6,6 +6,9 @@ jobs:
     outputs:
       matrix: ${{ steps.set-matrix.outputs.matrix }}
     steps:
+      - name: Checkout Repo
+        uses: actions/checkout@v4
+
       - id: set-matrix
         run: |
           json_output=$(yq e -o=json '.include = .data | del(.data)' fake-config.yml)
