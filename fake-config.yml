@@ -3,3 +3,5 @@ data:
     config: "dev"
   - project: "bar"
     config: "release"
+  - project: "bark"
+    config: "woof"
