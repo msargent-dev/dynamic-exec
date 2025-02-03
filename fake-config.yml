@@ -1,0 +1,5 @@
+data:
+  - project: "foo"
+    config: "dev"
+  - project: "bar"
+    config: "release"
