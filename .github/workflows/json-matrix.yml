@@ -12,6 +12,7 @@ jobs:
       - id: set-matrix
         run: |
           json_output=$(yq e -o=json '.include = .data | del(.data)' fake-config.yml)
+          echo "output is $json_output"
           echo "::set-output name=matrix::$json_output"
   job2:
     needs: job1
