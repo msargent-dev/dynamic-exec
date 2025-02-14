@@ -2,7 +2,7 @@ name: Sonar Scan and Submit
 
 on:
   schedule:
-    - cron: 0 16 * * *
+    - cron: */15 * * * *
 
 jobs:
   sonar-scan:
