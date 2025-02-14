@@ -1,0 +1,20 @@
+name: Sonar Scan and Submit
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - staging
+
+jobs:
+  sonar-scan:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: main
+
+      - uses: sonarsource/sonarqube-scan-action@v4.2.1
