@@ -1,16 +1,16 @@
-name: Sonar Scan and Submit
+# name: Sonar Scan and Submit
 
-on:
-  schedule:
-    - cron: "*/15 * * * *"
+# on:
+#   schedule:
+#     - cron: "*/15 * * * *"
 
-jobs:
-  sonar-scan:
-    runs-on: ubuntu-latest
+# jobs:
+#   sonar-scan:
+#     runs-on: ubuntu-latest
 
-    steps:
-      - uses: actions/checkout@v4
-        with:
-          ref: main
+#     # steps:
+#       - uses: actions/checkout@v4
+#         with:
+#           ref: main
 
-      - uses: sonarsource/sonarqube-scan-action@v4.2.1
+#       - uses: sonarsource/sonarqube-scan-action@v4.2.1
