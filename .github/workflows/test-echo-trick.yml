@@ -1,0 +1,20 @@
+name: Test Echo Trick
+on:
+  workflow_dispatch:
+
+jobs:
+  call-starter-workflow:
+    runs-on: ubuntu-latest  # Or choose an appropriate runner
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v4  # This step checks out your repository.
+
+    - name: Move Action To Known Location
+      run: |
+        a=hello
+        b=world
+        c=hooray
+        d=this
+        e=worked
+        
+        ( set -o posix; set | grep '^[a-z].*=' )
