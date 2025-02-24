@@ -9,7 +9,7 @@ jobs:
     - name: Checkout repository
       uses: actions/checkout@v4  # This step checks out your repository.
 
-    - name: Move Action To Known Location
+    - name: Test echoing all variables
       run: |
         a=hello
         b=world
@@ -17,4 +17,10 @@ jobs:
         d=this
         e=worked
         
+        echo "vars should appear below this line"
         ( set -o posix; set | grep '^[a-z].*=' )
+        ( set -o posix; set | grep '^[a-z].*=' ) >> $GITHUB_ENV
+
+    - name: Test using vars from the env
+      run: |
+        echo ${{ env.c }} ${{ env.d }} ${{ env.e }}
