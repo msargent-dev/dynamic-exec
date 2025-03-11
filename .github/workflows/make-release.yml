@@ -1,0 +1,25 @@
+name: Test Release Workflow
+on:
+  workflow_dispatch:
+    inputs:
+      name:
+        type: string
+        required: true
+        description: "Name of release/tag to create"
+
+jobs:
+  call-starter-workflow:
+    runs-on: ubuntu-latest  # Or choose an appropriate runner
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4  # This step checks out your repository.
+
+      - name: Create Release
+        id: create_release
+        uses: actions/create-release@v1
+        with:
+          tag_name: v${{ inputs.name }}
+          release_name: v${{ inputs.name }}
+          draft: false
+          prerelease: true
+          commitish: main
