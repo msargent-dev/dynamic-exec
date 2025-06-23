@@ -1,0 +1,16 @@
+name: Concurrency Test
+
+on:
+  workflow_call:
+
+concurrency:
+  group: concurrency-testing
+  cancel-in-progress: false
+
+jobs:
+  run-and-sleep:
+    runs-on: ubuntu-latest
+    steps:
+      - run: |
+          echo "sleeping"
+          sleep 120
