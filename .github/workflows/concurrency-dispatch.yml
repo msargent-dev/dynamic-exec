@@ -5,13 +5,7 @@ on:
 
 jobs:
   run_reusable_workflow:
-    runs-on: ubuntu-latest
     concurrency:
       group: msargent-dev-reusable-workflow-queue # Shared concurrency group name
       cancel-in-progress: false     # Queue instead of canceling
-    steps:
-      - name: checkout
-        uses: actions/checkout@v4
-    
-      - name: Call Reusable Workflow
-        uses: ./.github/workflows/concurrency-test.yml
+    uses: ./.github/workflows/concurrency-test.yml
