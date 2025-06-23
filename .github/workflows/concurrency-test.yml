@@ -4,7 +4,7 @@ on:
   workflow_call:
 
 concurrency:
-  group: concurrency-testing
+  group: ${{ github.workflow }}
   cancel-in-progress: false
 
 jobs:
